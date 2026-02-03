@@ -176,22 +176,28 @@
   </div>
 
   <script>
-    const data = JSON.parse(localStorage.getItem("emailData"));
+  function formatearFechaArgentina(fechaISO) {
+    if (!fechaISO) return "";
+    const [anio, mes, dia] = fechaISO.split("-");
+    return `${dia}/${mes}/${anio}`;
+  }
 
-    if (data) {
-      document.getElementById("from").innerText = data.from || "";
-      document.getElementById("to").innerText = data.to || "";
-      document.getElementById("subject").innerText = data.subject || "";
-      document.getElementById("date").innerText = data.date || "";
-      document.getElementById("time").innerText = data.time || "";
-      document.getElementById("body").innerText = data.body || "";
+  const data = JSON.parse(localStorage.getItem("emailData"));
 
-      if (data.attachment) {
-        document.getElementById("attachmentName").innerText = data.attachment;
-        document.getElementById("attachment").style.display = "flex";
-      }
+  if (data) {
+    document.getElementById("from").innerText = data.from || "";
+    document.getElementById("to").innerText = data.to || "";
+    document.getElementById("subject").innerText = data.subject || "";
+    document.getElementById("date").innerText = formatearFechaArgentina(data.date);
+    document.getElementById("time").innerText = data.time || "";
+    document.getElementById("body").innerText = data.body || "";
+
+    if (data.attachment) {
+      document.getElementById("attachmentName").innerText = data.attachment;
+      document.getElementById("attachment").style.display = "flex";
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
