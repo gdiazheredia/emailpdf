@@ -5,6 +5,9 @@
   <title>Vista previa email</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Fuente Sora -->
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700&display=swap" rel="stylesheet">
+
   <style>
     /* ===== CONFIGURACIÓN DE IMPRESIÓN ===== */
     @page {
@@ -51,6 +54,22 @@
       color: #005E5C;
     }
 
+    /* ===== ADJUNTO ===== */
+    .attachment {
+      margin: 12px 0 20px;
+      padding: 10px 12px;
+      background: #f7f9fb;
+      border: 1px solid #C2ADFF;
+      font-size: 13px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .clip {
+      font-size: 16px;
+    }
+
     #body {
       white-space: pre-line;
       font-size: 14px;
@@ -58,6 +77,7 @@
       margin-top: 16px;
     }
 
+    /* ===== FOOTER ===== */
     footer {
       margin-top: 40px;
       padding-top: 12px;
@@ -75,8 +95,10 @@
 
     footer .brand {
       margin-top: 10px;
-      font-weight: bold;
-      color: #005E5C;
+      font-family: "Sora", sans-serif;
+      font-weight: 700;
+      color: #3D57C7;
+      font-size: 13px;
     }
 
     /* ===== ACCIONES ===== */
@@ -132,6 +154,12 @@
       <p><strong>Fecha:</strong> <span id="date"></span> <span id="time"></span></p>
     </div>
 
+    <!-- ADJUNTO -->
+    <div class="attachment" id="attachment">
+      <span class="clip">📎</span>
+      <span id="attachmentName"></span>
+    </div>
+
     <div id="body"></div>
 
     <footer>
@@ -157,6 +185,11 @@
       document.getElementById("date").innerText = data.date || "";
       document.getElementById("time").innerText = data.time || "";
       document.getElementById("body").innerText = data.body || "";
+
+      if (data.attachment) {
+        document.getElementById("attachmentName").innerText = data.attachment;
+        document.getElementById("attachment").style.display = "flex";
+      }
     }
   </script>
 
