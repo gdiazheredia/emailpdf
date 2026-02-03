@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Email PDF Generator</title>
+  <title>Generador de Email - Vista previa</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -10,99 +10,135 @@
       font-family: "Segoe UI", Tahoma, Arial, sans-serif;
       background: #f4f6f8;
       margin: 0;
-      font-size: 14px;
+      padding: 0;
+      color: #222;
     }
 
-    header {
-      background: #3D57C7;
-      color: white;
-      padding: 16px 24px;
-    }
-
-    main {
-      padding: 24px;
-      max-width: 600px;
-      margin: auto;
-    }
-
-    section {
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
       background: white;
-      padding: 20px;
-      border-radius: 4px;
-      border-top: 4px solid #C2ADFF;
+      padding: 32px;
+      border-radius: 6px;
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #3D57C7;
+      font-size: 22px;
     }
 
     label {
       display: block;
-      margin-top: 12px;
-      font-weight: 600;
-      color: #005E5C;
+      margin-bottom: 14px;
+      font-size: 14px;
     }
 
-    input, textarea {
+    input,
+    textarea {
       width: 100%;
-      padding: 6px;
+      padding: 8px;
       margin-top: 4px;
-      font-family: inherit;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    small {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: #666;
     }
 
     button {
-      margin-top: 20px;
-      padding: 10px 16px;
-      background: #3D57C7;
+      margin-top: 24px;
+      padding: 10px 18px;
+      background: #005E5C;
       color: white;
       border: none;
-      cursor: pointer;
       font-size: 14px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background: #004746;
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Email institucional</h1>
-</header>
+  <div class="container">
+    <h1>Generador de email institucional</h1>
 
-<main>
-  <section>
-    <label>De</label>
-    <input id="from" type="email">
+    <form onsubmit="event.preventDefault(); generarPreview();">
 
-    <label>Para</label>
-    <input id="to" type="email">
+      <label>
+        De:
+        <input type="email" id="from" placeholder="ej: comercial@parquesalud.com.ar" required>
+      </label>
 
-    <label>Asunto</label>
-    <input id="subject" type="text">
+      <label>
+        Para:
+        <input type="email" id="to" placeholder="ej: afiliado@email.com" required>
+      </label>
 
-    <label>Fecha</label>
-    <input id="date" type="date">
+      <label>
+        Asunto:
+        <input type="text" id="subject" required>
+      </label>
 
-    <label>Hora</label>
-    <input id="time" type="time">
+      <label>
+        Fecha:
+        <input type="date" id="date" required>
+      </label>
 
-    <label>Cuerpo del mail</label>
-    <textarea id="body" rows="8"></textarea>
+      <label>
+        Hora:
+        <input type="time" id="time" required>
+      </label>
 
-    <button onclick="finalizar()">Finalizar</button>
-  </section>
-</main>
+      <label>
+        Archivo adjunto (nombre):
+        <input type="text" id="attachment" placeholder="ej: contrato_afiliacion.pdf">
+        <small>
+          Solo se registra el nombre del archivo. El documento no se adjunta ni se envía realmente.
+        </small>
+      </label>
 
-<script>
-  function finalizar() {
-    const data = {
-      from: from.value,
-      to: to.value,
-      subject: subject.value,
-      date: date.value,
-      time: time.value,
-      body: body.value
-    };
+      <label>
+        Cuerpo del mail:
+        <textarea id="body" required></textarea>
+      </label>
 
-    localStorage.setItem("emailData", JSON.stringify(data));
-    window.location.href = "preview.html";
-  }
-</script>
+      <button type="submit">Finalizar y ver vista previa</button>
+    </form>
+  </div>
+
+  <script>
+    function generarPreview() {
+      const emailData = {
+        from: document.getElementById("from").value,
+        to: document.getElementById("to").value,
+        subject: document.getElementById("subject").value,
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value,
+        attachment: document.getElementById("attachment").value,
+        body: document.getElementById("body").value
+      };
+
+      localStorage.setItem("emailData", JSON.stringify(emailData));
+      window.location.href = "preview.html";
+    }
+  </script>
 
 </body>
 </html>
