@@ -56,18 +56,22 @@
 
     /* ===== ADJUNTO ===== */
     .attachment {
-      margin: 12px 0 20px;
-      padding: 10px 12px;
-      background: #f7f9fb;
-      border: 1px solid #C2ADFF;
-      font-size: 13px;
-      display: none;
+      display: flex;
       align-items: center;
       gap: 8px;
+      margin-top: 12px;
+      font-size: 14px;
+      color: #202124; /* texto email estándar */
     }
 
-    .clip {
-      font-size: 16px;
+    .clip-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: #5f6368; /* gris Gmail/Outlook */
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     #body {
@@ -155,11 +159,15 @@
     </div>
 
     <!-- ADJUNTO -->
-    <div class="attachment" id="attachment">
-      <span class="clip">📎</span>
+    <div id="attachment" class="attachment" style="display:none;">
+      <span class="clip-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M16.5 6.5v9a4.5 4.5 0 1 1-9 0V5a3 3 0 1 1 6 0v8.5a1.5 1.5 0 1 1-3 0V6.5" />
+        </svg>
+      </span>
       <span id="attachmentName"></span>
     </div>
-
+  
     <div id="body"></div>
 
     <footer>
