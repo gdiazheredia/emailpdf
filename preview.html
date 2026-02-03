@@ -186,25 +186,39 @@
   </div>
 
   <script>
-  function formatearFechaArgentina(fechaISO) {
+  // Helper: fecha larga en español (Argentina)
+  function formatFechaLarga(fechaISO) {
     if (!fechaISO) return "";
-    const [anio, mes, dia] = fechaISO.split("-");
-    return `${dia}/${mes}/${anio}`;
+
+    const fecha = new Date(fechaISO + "T00:00:00");
+
+    return fecha.toLocaleDateString("es-AR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
   }
 
+  // Cargar datos del mail desde localStorage
   const data = JSON.parse(localStorage.getItem("emailData"));
 
   if (data) {
+    // Encabezados
     document.getElementById("from").innerText = data.from || "";
     document.getElementById("to").innerText = data.to || "";
     document.getElementById("subject").innerText = data.subject || "";
-    document.getElementById("date").innerText = formatearFechaArgentina(data.date);
+
+    // Fecha y hora
+    document.getElementById("date").innerText = formatFechaLarga(data.date);
     document.getElementById("time").innerText = data.time || "";
+
+    // Cuerpo del mail
     document.getElementById("body").innerText = data.body || "";
 
-    if (data.attachment) {
+    // Adjunto
+    if (data.attachment && data.attachment.trim() !== "") {
       document.getElementById("attachmentName").innerText = data.attachment;
-      document.getElementById("attachment").style.display = "flex";
+      document.getElementById("attachment").style.display = "inline-flex";
     }
   }
 </script>
