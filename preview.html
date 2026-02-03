@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Vista previa email</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .email {
+      background: white;
+      max-width: 650px;
+      margin: 40px auto;
+      padding: 24px;
+    }
+
+    .header {
+      background: #3D57C7;
+      color: white;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+
+    .meta {
+      background: #F3F0FF;
+      padding: 12px;
+      border-left: 4px solid #ABC94A;
+      margin-bottom: 16px;
+    }
+
+    .meta p {
+      margin: 4px 0;
+    }
+
+    .meta strong {
+      color: #005E5C;
+    }
+
+    footer {
+      margin-top: 32px;
+      font-size: 11px;
+      color: #555;
+      border-top: 1px solid #C2ADFF;
+      padding-top: 8px;
+    }
+
+    .actions {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 8px 14px;
+      background: #005E5C;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    @media print {
+      .actions {
+        display: none;
+      }
+      body {
+        background: white;
+      }
+      .email {
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="actions">
+  <button onclick="window.print()">Imprimir / Guardar PDF</button>
+</div>
+
+<div class="email">
+  <div class="header">
+    <strong>Email institucional</strong>
+  </div>
+
+  <div class="meta">
+    <p><strong>De:</strong> <span id="from"></span></p>
+    <p><strong>Para:</strong> <span id="to"></span></p>
+    <p><strong>Asunto:</strong> <span id="subject"></span></p>
+    <p><strong>Fecha:</strong> <span id="date"></span> <span id="time"></span></p>
+  </div>
+
+  <div id="body" style="white-space: pre-line;"></div>
+
+  <footer>
+    Documento generado por sistema interno. No implica envío automático de email.
+  </footer>
+</div>
+
+<script>
+  const data = JSON.parse(localStorage.getItem("emailData"));
+
+  if (data) {
+    from.innerText = data.from;
+    to.innerText = data.to;
+    subject.innerText = data.subject;
+    date.innerText = data.date;
+    time.innerText = data.time;
+    body.innerText = data.body;
+  }
+</script>
+
+</body>
+</html>
