@@ -210,7 +210,9 @@
 
     // Fecha y hora
     document.getElementById("date").innerText = formatFechaLarga(data.date);
-    document.getElementById("time").innerText = data.time || "";
+    document.getElementById("time").innerText = data.time
+      ? `${data.time} hs.`
+      : "";
 
     // Cuerpo del mail
     document.getElementById("body").innerText = data.body || "";
