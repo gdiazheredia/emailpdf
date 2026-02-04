@@ -57,15 +57,13 @@
 
     /* ===== ADJUNTO ===== */
     .attachment {
-      display: inline-flex;
+      background: #f1f3f4;
+      border: 1px solid #dadce0;
+      padding: 8px 12px;
+      border-radius: 6px;
+      display: flex;
       align-items: center;
       gap: 8px;
-      margin-top: 12px;
-      padding: 6px 10px;
-      background-color: #E8E8E8; /* gris Gmail */
-      border-radius: 6px;
-      font-size: 14px;
-      color: #202124;
     }
 
     .clip-icon svg {
@@ -131,8 +129,17 @@
 
     /* ===== ESTILOS SOLO PARA IMPRESIÓN ===== */
     @media print {
+
+      * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
       body {
         background: white;
+        font-size: 13px;
+        line-height: 1.35;
+        margin: 0;
       }
 
       .actions {
@@ -142,7 +149,39 @@
       .email {
         max-width: 100%;
         margin: 0;
-        padding: 0;
+        padding: 24px 28px;
+        border: none;
+        border-radius: 0;
+      }
+
+      .header {
+        margin-bottom: 12px;
+      }
+
+      .meta {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+
+      .meta p {
+        margin: 3px 0;
+      }
+
+      #body {
+        margin-top: 14px;
+        margin-bottom: 18px;
+      }
+
+  /* 🔑 ADJUNTO EN IMPRESIÓN */
+      .attachment {
+        background: #eeeeee !important;
+        border: 1px solid #d0d0d0;
+        padding: 8px 12px;
+        margin-top: 10px;
+      }
+
+      footer {
+        margin-top: 24px;
       }
     }
   </style>
